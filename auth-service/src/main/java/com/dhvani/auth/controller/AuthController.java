@@ -3,6 +3,7 @@ package com.dhvani.auth.controller;
 import com.dhvani.auth.dto.RegisterRequest;
 import com.dhvani.auth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.dhvani.auth.dto.LoginRequest;
 
@@ -14,8 +15,8 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest request) {
-        return authService.register(request);
+    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(authService.register(request));
     }
 
     @PostMapping("/login")
