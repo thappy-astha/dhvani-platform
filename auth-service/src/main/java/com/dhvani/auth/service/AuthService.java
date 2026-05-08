@@ -2,6 +2,8 @@ package com.dhvani.auth.service;
 
 import com.dhvani.auth.dto.RegisterRequest;
 import com.dhvani.auth.entity.User;
+import com.dhvani.auth.exception.DuplicateEmailException;
+import com.dhvani.auth.exception.UserNotFoundException;
 import com.dhvani.auth.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,8 @@ public class AuthService {
 
     public String register(RegisterRequest request) {
 
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists");
+        if(userRepository.existsByEmail(request.getEmail())) {
+            throw new DuplicateEmailException("Email already exists");
         }
 
         User user = new User();
@@ -37,7 +39,7 @@ public class AuthService {
     public String login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         boolean passwordMatches = passwordEncoder.matches(
                 request.getPassword(),
