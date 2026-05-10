@@ -1,5 +1,6 @@
 package com.dhvani.auth.controller;
 
+import com.dhvani.auth.dto.AuthResponse;
 import com.dhvani.auth.dto.RegisterRequest;
 import com.dhvani.auth.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,17 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<AuthResponse> register(
+            @RequestBody RegisterRequest request
+    ) {
         return ResponseEntity.ok(authService.register(request));
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request) {
-        return authService.login(request);
+    public ResponseEntity<AuthResponse> login(
+            @RequestBody LoginRequest request
+    ) {
+        return ResponseEntity.ok(authService.login(request));
     }
 }
 

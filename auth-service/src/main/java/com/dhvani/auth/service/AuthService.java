@@ -1,5 +1,6 @@
 package com.dhvani.auth.service;
 
+import com.dhvani.auth.dto.AuthResponse;
 import com.dhvani.auth.dto.RegisterRequest;
 import com.dhvani.auth.entity.User;
 import com.dhvani.auth.exception.DuplicateEmailException;
@@ -20,7 +21,7 @@ public class AuthService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String register(RegisterRequest request) {
+    public AuthResponse register(RegisterRequest request) {
 
         if(userRepository.existsByEmail(request.getEmail())) {
             throw new DuplicateEmailException("Email already exists");
@@ -33,10 +34,10 @@ public class AuthService {
 
         userRepository.save(user);
 
-        return "User registered successfully";
+        return new AuthResponse("User registered successfully");
     }
 
-    public String login(LoginRequest request) {
+    public AuthResponse login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
@@ -50,7 +51,7 @@ public class AuthService {
             throw new RuntimeException("Invalid credentials");
         }
 
-        return "LOGIN SUCCESS";
+        return new AuthResponse("Login successful");
     }
 
 }
