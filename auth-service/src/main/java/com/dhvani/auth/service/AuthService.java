@@ -43,7 +43,7 @@ public class AuthService {
 
         logger.info("User registered successfully with email: {}", user.getEmail());
 
-        return new AuthResponse("User registered successfully");
+        return new AuthResponse("User registered successfully", null);
     }
 
 //    public AuthResponse login(LoginRequest request) {
@@ -85,7 +85,7 @@ public class AuthService {
 
         logger.info("Login successful for email: {}", request.getEmail());
 
-        return new AuthResponse("Login successful");
+        return new AuthResponse("Login successful", null);
     }
 
 }
