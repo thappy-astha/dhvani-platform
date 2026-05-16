@@ -1,5 +1,6 @@
 package com.dhvani.auth.exception;
 
+import com.dhvani.auth.dto.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -9,19 +10,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<String> handleUserNotFound(
+    public ResponseEntity<ErrorResponse> handleUserNotFound(
             UserNotFoundException ex
     ) {
-        return new ResponseEntity<>(
+        ErrorResponse error = new ErrorResponse(
                 ex.getMessage(),
-                HttpStatus.NOT_FOUND
+                HttpStatus.NOT_FOUND.value()
         );
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(DuplicateEmailException.class)
-    public ResponseEntity<String> handleDuplicateEmail(
-            DuplicateEmailException ex
-    ) {
+    public ResponseEntity<String> handleDuplicateEmail(DuplicateEmailException ex) {
         return new ResponseEntity<>(
                 ex.getMessage(),
                 HttpStatus.BAD_REQUEST
