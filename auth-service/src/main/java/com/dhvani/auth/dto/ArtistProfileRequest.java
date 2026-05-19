@@ -1,21 +1,34 @@
 package com.dhvani.auth.dto;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class ArtistProfileRequest {
 
-    @Column(nullable = false)
+    @NotNull
+    private Long userId;
+
+    @NotBlank
     private String artistName;
 
+    @NotBlank
     private String genre;
 
-    @Column(length = 1000)
     private String bio;
 
     private Integer bpm;
+
     private String raag;
+
     private String musicalKey;
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public String getArtistName() {
         return artistName;
