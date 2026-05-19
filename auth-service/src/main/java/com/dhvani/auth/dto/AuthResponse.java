@@ -18,7 +18,4 @@ public class AuthResponse {
         return token;
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
 }
