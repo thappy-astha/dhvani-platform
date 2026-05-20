@@ -1,6 +1,7 @@
 package com.dhvani.auth.controller;
 
 import com.dhvani.auth.dto.ArtistProfileRequest;
+import com.dhvani.auth.dto.ArtistProfileResponse;
 import com.dhvani.auth.entity.ArtistProfile;
 import com.dhvani.auth.service.ArtistProfileService;
 
@@ -18,11 +19,11 @@ public class ArtistProfileController {
     private ArtistProfileService artistProfileService;
 
     @PostMapping("/profile")
-    public ResponseEntity<ArtistProfile> createProfile(
+    public ResponseEntity<ArtistProfileResponse> createProfile(
             @Valid @RequestBody ArtistProfileRequest request
     ) {
 
-        ArtistProfile profile =
+        ArtistProfileResponse profile =
                 artistProfileService.createProfile(request);
 
         return ResponseEntity.ok(profile);

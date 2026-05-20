@@ -1,6 +1,7 @@
 package com.dhvani.auth.service;
 
 import com.dhvani.auth.dto.ArtistProfileRequest;
+import com.dhvani.auth.dto.ArtistProfileResponse;
 import com.dhvani.auth.entity.ArtistProfile;
 import com.dhvani.auth.entity.User;
 import com.dhvani.auth.exception.UserNotFoundException;
@@ -21,7 +22,7 @@ public class ArtistProfileService {
     private UserRepository userRepository;
 
     @Transactional
-    public ArtistProfile createProfile(ArtistProfileRequest request) {
+    public ArtistProfileResponse createProfile(ArtistProfileRequest request) {
 
         // Find user
         User user = userRepository.findById(request.getUserId())
@@ -50,6 +51,14 @@ public class ArtistProfileService {
         // Save profile
         ArtistProfile savedProfile = artistProfileRepository.save(profile);
 
-        return savedProfile;
+        return new ArtistProfileResponse(
+                savedProfile.getId(),
+                savedProfile.getArtistName(),
+                savedProfile.getGenre(),
+                savedProfile.getBio(),
+                savedProfile.getBpm(),
+                savedProfile.getRaag(),
+                savedProfile.getMusicalKey()
+        );
     }
 }
