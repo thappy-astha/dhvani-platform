@@ -2,7 +2,6 @@ package com.dhvani.auth.controller;
 
 import com.dhvani.auth.dto.ArtistProfileRequest;
 import com.dhvani.auth.dto.ArtistProfileResponse;
-import com.dhvani.auth.entity.ArtistProfile;
 import com.dhvani.auth.service.ArtistProfileService;
 
 import jakarta.validation.Valid;
@@ -28,4 +27,20 @@ public class ArtistProfileController {
 
         return ResponseEntity.ok(profile);
     }
+
+    @GetMapping("/profile/{userId}")
+    public ResponseEntity<ArtistProfileResponse> getProfile(@PathVariable long id) {
+        return ResponseEntity.ok(ArtistProfileService.getProfileById(id));
+    }
+
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<ArtistProfileResponse> getProfile(
+            @PathVariable Long id
+    ) {
+
+        return ResponseEntity.ok(
+                artistProfileService.getProfileById(id)
+        );
+    }
+
 }

@@ -21,6 +21,12 @@ public class ArtistProfileService {
     @Autowired
     private UserRepository userRepository;
 
+    public static ArtistProfileResponse getProfileById(long id) {
+        return ArtistProfileRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Profile not found"));
+
+    }
+
     @Transactional
     public ArtistProfileResponse createProfile(ArtistProfileRequest request) {
 
@@ -59,6 +65,24 @@ public class ArtistProfileService {
                 savedProfile.getBpm(),
                 savedProfile.getRaag(),
                 savedProfile.getMusicalKey()
+        );
+    }
+
+    public ArtistProfileResponse getProfileById(Long id) {
+
+        ArtistProfile profile = artistProfileRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Profile not found")
+                );
+
+        return new ArtistProfileResponse(
+                profile.getId(),
+                profile.getArtistName(),
+                profile.getGenre(),
+                profile.getBio(),
+                profile.getBpm(),
+                profile.getRaag(),
+                profile.getMusicalKey()
         );
     }
 }
