@@ -40,7 +40,16 @@ public class ArtistProfileController {
         return ResponseEntity.ok(profile);
     }
 
+    @PutMapping("/profile/{id}")
+    public ResponseEntity<ArtistProfileResponse> updateProfile(
+            @PathVariable Long id,
+            @Valid @RequestBody ArtistProfileRequest request
+    ) {
 
+        return ResponseEntity.ok(
+                artistProfileService.updateProfile(id, request)
+        );
+    }
 
 
 }

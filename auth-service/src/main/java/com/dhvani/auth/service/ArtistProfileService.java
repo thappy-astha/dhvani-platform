@@ -82,4 +82,37 @@ public class ArtistProfileService {
                 profile.getMusicalKey()
         );
     }
+
+
+    @Transactional
+    public ArtistProfileResponse updateProfile(
+            Long id,
+            ArtistProfileRequest request
+    ) {
+
+        ArtistProfile profile = artistProfileRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Artist profile not found")
+                );
+
+        profile.setArtistName(request.getArtistName());
+        profile.setGenre(request.getGenre());
+        profile.setBio(request.getBio());
+        profile.setBpm(request.getBpm());
+        profile.setRaag(request.getRaag());
+        profile.setMusicalKey(request.getMusicalKey());
+
+        ArtistProfile updatedProfile =
+                artistProfileRepository.save(profile);
+
+        return new ArtistProfileResponse(
+                updatedProfile.getId(),
+                updatedProfile.getArtistName(),
+                updatedProfile.getGenre(),
+                updatedProfile.getBio(),
+                updatedProfile.getBpm(),
+                updatedProfile.getRaag(),
+                updatedProfile.getMusicalKey()
+        );
+    }
 }
