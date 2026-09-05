@@ -21,12 +21,6 @@ public class ArtistProfileService {
     @Autowired
     private UserRepository userRepository;
 
-    public static ArtistProfileResponse getProfileById(long id) {
-        return ArtistProfileRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Profile not found"));
-
-    }
-
     @Transactional
     public ArtistProfileResponse createProfile(ArtistProfileRequest request) {
 
