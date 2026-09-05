@@ -28,10 +28,10 @@ public class ArtistProfileController {
         return ResponseEntity.ok(profile);
     }
 
-    @GetMapping("/profile/{userId}")
-    public ResponseEntity<ArtistProfileResponse> getProfile(@PathVariable long id) {
-        return ResponseEntity.ok(ArtistProfileService.getProfileById(id));
-    }
+//    @GetMapping("/profile/{userId}")
+//    public ResponseEntity<ArtistProfileResponse> getProfile(@PathVariable long id) {
+//        return ResponseEntity.ok(ArtistProfileService.getProfileById(id));
+//    }
 
     @GetMapping("/profile/{id}")
     public ResponseEntity<ArtistProfileResponse> getProfile(

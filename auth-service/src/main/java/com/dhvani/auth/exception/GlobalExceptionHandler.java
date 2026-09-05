@@ -37,4 +37,14 @@ public class GlobalExceptionHandler {
                 HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
+
+    @ExceptionHandler(ArtistProfileNotFoundException.class)
+    public ResponseEntity<String> handleArtistProfileNotFound(
+            ArtistProfileNotFoundException ex
+    ) {
+        return new ResponseEntity<>(
+                ex.getMessage(),
+                HttpStatus.NOT_FOUND
+        );
+    }
 }

@@ -4,6 +4,7 @@ import com.dhvani.auth.dto.ArtistProfileRequest;
 import com.dhvani.auth.dto.ArtistProfileResponse;
 import com.dhvani.auth.entity.ArtistProfile;
 import com.dhvani.auth.entity.User;
+import com.dhvani.auth.exception.ArtistProfileNotFoundException;
 import com.dhvani.auth.exception.UserNotFoundException;
 import com.dhvani.auth.repository.ArtistProfileRepository;
 import com.dhvani.auth.repository.UserRepository;
@@ -66,7 +67,9 @@ public class ArtistProfileService {
 
         ArtistProfile profile = artistProfileRepository.findById(id)
                 .orElseThrow(() ->
-                        new RuntimeException("Profile not found")
+                        new ArtistProfileNotFoundException(
+                                "Artist profile not found"
+                        )
                 );
 
         return new ArtistProfileResponse(
