@@ -17,6 +17,18 @@ public class ArtistProfileController {
     @Autowired
     private ArtistProfileService artistProfileService;
 
+
+
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<ArtistProfileResponse> getProfile(
+            @PathVariable Long id
+    ) {
+
+        return ResponseEntity.ok(
+                artistProfileService.getProfileById(id)
+        );
+    }
+
     @PostMapping("/profile")
     public ResponseEntity<ArtistProfileResponse> createProfile(
             @Valid @RequestBody ArtistProfileRequest request
@@ -28,19 +40,7 @@ public class ArtistProfileController {
         return ResponseEntity.ok(profile);
     }
 
-//    @GetMapping("/profile/{userId}")
-//    public ResponseEntity<ArtistProfileResponse> getProfile(@PathVariable long id) {
-//        return ResponseEntity.ok(ArtistProfileService.getProfileById(id));
-//    }
 
-    @GetMapping("/profile/{id}")
-    public ResponseEntity<ArtistProfileResponse> getProfile(
-            @PathVariable Long id
-    ) {
 
-        return ResponseEntity.ok(
-                artistProfileService.getProfileById(id)
-        );
-    }
 
 }
