@@ -46,6 +46,7 @@ public class ArtistProfileController {
             @Valid @RequestBody ArtistProfileRequest request
     ) {
 
+
         return ResponseEntity.ok(
                 artistProfileService.updateProfile(id, request)
         );
