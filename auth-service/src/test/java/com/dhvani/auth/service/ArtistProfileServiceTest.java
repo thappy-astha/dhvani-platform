@@ -113,5 +113,30 @@ class ArtistProfileServiceTest {
         assertEquals("Singer and composer", response.getBio());
     }
 
+    @Test
+    void shouldThrowExceptionWhenUserDoesNotExist() {
+
+        ArtistProfileRequest request = new ArtistProfileRequest();
+
+        request.setUserId(999L);
+        request.setArtistName("Arijit");
+        request.setGenre("Bollywood");
+        request.setBio("Singer and composer");
+        request.setBpm(120);
+        request.setRaag("Yaman");
+        request.setMusicalKey("C Major");
+
+        when(userRepository.findById(999L))
+                .thenReturn(Optional.empty());
+
+        assertThrows(
+                UserNotFoundException.class,
+                () -> artistProfileService.createProfile(request)
+        );
+
+    }
+
+
+
 
 }
