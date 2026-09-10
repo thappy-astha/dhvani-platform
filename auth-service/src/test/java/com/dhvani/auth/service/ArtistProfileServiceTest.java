@@ -6,6 +6,7 @@ import com.dhvani.auth.entity.ArtistProfile;
 import com.dhvani.auth.entity.Role;
 import com.dhvani.auth.entity.User;
 import com.dhvani.auth.exception.ArtistProfileNotFoundException;
+import com.dhvani.auth.exception.UserNotFoundException;
 import com.dhvani.auth.repository.ArtistProfileRepository;
 import com.dhvani.auth.repository.UserRepository;
 import org.junit.jupiter.api.extension.ExtendWith;
