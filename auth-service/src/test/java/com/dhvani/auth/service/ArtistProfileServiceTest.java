@@ -137,6 +137,36 @@ class ArtistProfileServiceTest {
     }
 
 
+    @Test
+    void shouldThrowExceptionWhenArtistProfileAlreadyExists()  {
+
+        ArtistProfileRequest request = new ArtistProfileRequest();
+
+        request.setUserId(1L);
+        request.setArtistName("Arijit");
+        request.setGenre("Bollywood");
+        request.setBio("Singer and composer");
+        request.setBpm(120);
+        request.setRaag("Yaman");
+        request.setMusicalKey("C Major");
+
+        User user = new User();
+
+        user.setId(1L);
+        user.setEmail("test@gmail.com");
+        user.setRole(Role.ARTIST);
+
+        when(userRepository.findById(1L))
+                .thenReturn(Optional.of(user));
+
+        when(artistProfileRepository.existsByUserId(1L))
+                .thenReturn(true);
+
+        assertThrows(
+                RuntimeException.class,
+                () -> artistProfileService.createProfile(request)
+        );
+    }
 
 
 }
